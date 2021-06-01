@@ -1,23 +1,24 @@
-function Form(props) {
+function Form({setInputText, setTodos, todos, inputText, setStatus}) {
   // console.log(props.todos);
 
   const inputTextHandler = (e) => {
     console.log(e.target.value);
-    props.setInputText(e.target.value);
+    setInputText(e.target.value);
   };
 
   const onSubmit = (e) => {
     e.preventDefault();
-    props.setTodos([
-      ...props.todos,
-      { text: props.inputText, completed: false, id: Math.random() * 1000 },
+    setTodos([
+      ...todos,
+      { text: inputText, completed: false, id: Math.random() * 1000 },
     ]);
-    props.setInputText("");
+    setInputText("");
   };
 
   const statusHandler =(e) =>{
-    console.log(e.target.value);
+    setStatus(e.target.value);
   }
+  
   return (
     <div>
       <form>
@@ -25,7 +26,7 @@ function Form(props) {
           onChange={inputTextHandler}
           type="text"
           className="todo-input"
-          value={props.inputText}
+          value={inputText}
         />
         <button onClick={onSubmit} className="todo-button" type="submit">
           <i className="fas fa-plus-square"></i>
